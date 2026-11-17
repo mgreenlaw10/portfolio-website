@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<!-- One project widget. Used by both project sections in index.html. -->
+<article th:fragment="card(project)" class="card">
+    <img th:if="${!#strings.isEmpty(project.image)}" class="card-image"
+         th:src="@{${project.image}}" th:alt="${project.title}">
+    <div th:unless="${!#strings.isEmpty(project.image)}" class="card-image placeholder">Image</div>
+    <div class="card-body">
+        <h3 th:text="${project.title}">Project</h3>
+        <p th:text="${project.description}">Description</p>
+        <a th:if="${!#strings.isEmpty(project.github)}" th:href="${project.github}"
+           target="_blank" rel="noopener">View on GitHub</a>
+    </div>
+</article>
+
+</body>
+</html>

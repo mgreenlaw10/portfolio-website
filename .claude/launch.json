@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "portfolio",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "C:\\projects\\java\\portfolio-website\\mvnw.cmd", "-f", "C:\\projects\\java\\portfolio-website\\pom.xml", "spring-boot:run"],
+      "port": 8080,
+      "autoPort": false
+    }
+  ]
+}

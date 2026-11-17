@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${portfolio.name}">Portfolio</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<main>
+
+    <section class="intro">
+        <img th:if="${!#strings.isEmpty(portfolio.photo)}" class="photo"
+             th:src="@{${portfolio.photo}}" th:alt="${portfolio.name}">
+        <div th:unless="${!#strings.isEmpty(portfolio.photo)}" class="photo placeholder">Photo</div>
+        <div>
+            <h1 th:text="${portfolio.name}">Name</h1>
+            <p th:text="${portfolio.description}">Description</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>Current Projects</h2>
+        <div class="grid">
+            <th:block th:each="project : ${portfolio.currentProjects}">
+                <div th:replace="~{fragments :: card(${project})}"></div>
+            </th:block>
+        </div>
+    </section>
+
+    <section>
+        <h2>Highlighted Projects</h2>
+        <div class="grid">
+            <th:block th:each="project : ${portfolio.highlightedProjects}">
+                <div th:replace="~{fragments :: card(${project})}"></div>
+            </th:block>
+        </div>
+    </section>
+
+</main>
+</body>
+</html>

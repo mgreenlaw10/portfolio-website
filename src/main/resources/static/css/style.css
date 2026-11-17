@@ -1,0 +1,126 @@
+:root {
+    --bg: #f7f7f8;
+    --surface: #ffffff;
+    --text: #1d1d1f;
+    --muted: #5f6368;
+    --border: #e2e2e6;
+    --placeholder: #e9e9ee;
+    --link: #2357d9;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #121214;
+        --surface: #1c1c1f;
+        --text: #ececf0;
+        --muted: #a0a0a8;
+        --border: #2e2e33;
+        --placeholder: #2a2a2f;
+        --link: #7aa2ff;
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.55;
+}
+
+main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 48px 16px 64px;
+}
+
+section + section {
+    margin-top: 48px;
+}
+
+h1, h2, h3 {
+    line-height: 1.2;
+    margin: 0 0 12px;
+}
+
+h2 {
+    font-size: 1.4rem;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 1.1rem;
+}
+
+p {
+    margin: 0 0 12px;
+    color: var(--muted);
+}
+
+a {
+    color: var(--link);
+    font-weight: 500;
+}
+
+.placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--placeholder);
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+/* Intro: photo + description */
+.intro {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+}
+
+.photo {
+    flex-shrink: 0;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+@media (max-width: 600px) {
+    .intro {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* Project widgets */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 16px;
+}

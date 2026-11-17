@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: portfolio-website
+
+# ---------------------------------------------------------------------------
+# Page content. Edit anything below, then restart the app to see changes.
+#
+# Images: put files in src/main/resources/static/images/ and reference them
+# as /images/<file>. Leave an image blank ("") to show a placeholder.
+# ---------------------------------------------------------------------------
+portfolio:
+  name: Mack Greenlaw
+  photo: ""   # e.g. /images/profile.jpg
+  description: >-
+    I'm a programmer and developer. Replace this text with a short description
+    of yourself: what you work on, what you're interested in, and what you're
+    looking for.
+
+  current-projects:
+    - title: Silly Cat Game
+      github: https://github.com/mgreenlaw10/sillycatgame
+      description: Add a description of this project here.
+      image: ""   # e.g. /images/projects/sillycatgame.png
+
+  highlighted-projects:
+    - title: Handwritten Digit Classifier
+      github: https://github.com/mgreenlaw10/handwritten-digit-classifier
+      description: A handwritten digit classifier written in Java.
+      image: ""
+    - title: Chess Engine
+      github: https://github.com/mgreenlaw10/chess-engine
+      description: A chess engine written in C.
+      image: ""
+    - title: Rust Text Editor
+      github: https://github.com/mgreenlaw10/rust-text-editor
+      description: A terminal-based text editor written in Rust.
+      image: ""
+    - title: Java Game Engine
+      github: https://github.com/mgreenlaw10/java-game-engine
+      description: A game engine written in Java.
+      image: ""

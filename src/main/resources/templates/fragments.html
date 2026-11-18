@@ -11,8 +11,10 @@
     <div class="card-body">
         <h3 th:text="${project.title}">Project</h3>
         <p th:text="${project.description}">Description</p>
-        <a th:if="${!#strings.isEmpty(project.github)}" th:href="${project.github}"
-           target="_blank" rel="noopener">View on GitHub</a>
+        <span th:if="${project.privateRepo == true}" class="btn btn-private"
+              aria-disabled="true">Private Repository</span>
+        <a th:if="${project.privateRepo != true and !#strings.isEmpty(project.github)}" class="btn btn-github"
+           th:href="${project.github}" target="_blank" rel="noopener">View on GitHub</a>
     </div>
 </article>
 

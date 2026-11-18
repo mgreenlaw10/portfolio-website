@@ -22,10 +22,12 @@ public class EditController {
 
 	private final PortfolioStore store;
 	private final ImageStorage images;
+	private final GitHubRepoChecker github;
 
-	public EditController(PortfolioStore store, ImageStorage images) {
+	public EditController(PortfolioStore store, ImageStorage images, GitHubRepoChecker github) {
 		this.store = store;
 		this.images = images;
+		this.github = github;
 	}
 
 	// ---- Profile (photo, name, description) ----
@@ -64,7 +66,7 @@ public class EditController {
 	@GetMapping("/projects/{section}/new")
 	public String newProject(@PathVariable String section, Model model) {
 		model.addAttribute("section", section(section));
-		model.addAttribute("project", new Project(null, "", "", "", ""));
+		model.addAttribute("project", new Project(null, "", "", "", "", null));
 		return "edit-project";
 	}
 
@@ -82,14 +84,15 @@ public class EditController {
 	public String publishProject(@PathVariable String section,
 			@RequestParam(required = false) String id,
 			@RequestParam String title,
-			@RequestParam String github,
+			@RequestParam("github") String githubUrl,
 			@RequestParam String description,
 			@RequestParam(required = false) MultipartFile image,
 			Model model) throws IOException {
 		Section s = section(section);
 		boolean isNew = !StringUtils.hasText(id);
-		String imagePath = isNew ? "" : store.findProject(s, id)
-				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)).image();
+		Project existing = isNew ? null : store.findProject(s, id)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+		String imagePath = isNew ? "" : existing.image();
 		try {
 			String uploaded = images.save(image);
 			if (uploaded != null) {
@@ -98,11 +101,16 @@ public class EditController {
 		} catch (IllegalArgumentException e) {
 			model.addAttribute("error", e.getMessage());
 			model.addAttribute("section", s);
-			model.addAttribute("project", new Project(isNew ? null : id, title, github, description, imagePath));
+			model.addAttribute("project", new Project(isNew ? null : id, title, githubUrl, description, imagePath, null));
 			return "edit-project";
 		}
+		// Ask GitHub whether the repo is private. If GitHub can't be reached and the link
+		// didn't change, keep what we knew before.
+		String link = githubUrl.strip();
+		Boolean privateRepo = github.isPrivate(link)
+				.orElse(existing != null && link.equals(existing.github()) ? existing.privateRepo() : null);
 		store.saveProject(s, new Project(isNew ? UUID.randomUUID().toString() : id,
-				title.strip(), github.strip(), description.strip(), imagePath));
+				title.strip(), link, description.strip(), imagePath, privateRepo));
 		return "redirect:/";
 	}
 

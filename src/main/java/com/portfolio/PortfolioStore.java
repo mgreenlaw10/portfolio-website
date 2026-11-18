@@ -71,6 +71,13 @@ public class PortfolioStore {
 		save();
 	}
 
+	/** Updates just the private-repo flag of one project, if it still exists. */
+	public synchronized void setPrivateRepo(Section section, String id, Boolean privateRepo) {
+		findProject(section, id)
+				.filter(p -> !java.util.Objects.equals(p.privateRepo(), privateRepo))
+				.ifPresent(p -> saveProject(section, p.withPrivateRepo(privateRepo)));
+	}
+
 	private void save() {
 		try {
 			Path tmp = file.resolveSibling(file.getFileName() + ".tmp");
@@ -88,7 +95,8 @@ public class PortfolioStore {
 
 	private static List<Project> toProjects(List<PortfolioProperties.Project> seeds) {
 		return seeds.stream()
-				.map(p -> new Project(UUID.randomUUID().toString(), p.title(), p.github(), p.description(), p.image()))
+				.map(p -> new Project(UUID.randomUUID().toString(), p.title(), p.github(), p.description(), p.image(),
+						null))
 				.toList();
 	}
 }

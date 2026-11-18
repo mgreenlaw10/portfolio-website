@@ -5,6 +5,7 @@
     --muted: #5f6368;
     --border: #e2e2e6;
     --placeholder: #e9e9ee;
+    --header: #f1f1f4;
     --link: #2357d9;
 }
 
@@ -16,6 +17,7 @@
         --muted: #a0a0a8;
         --border: #2e2e33;
         --placeholder: #2a2a2f;
+        --header: #242428;
         --link: #7aa2ff;
     }
 }
@@ -77,17 +79,46 @@ a {
     font-size: 0.9rem;
 }
 
-/* Intro: photo + description, on a panel styled like the project widgets.
-   The panel spans the full content width, so its edges line up with the
-   outer edges of the project grid below. */
+/* Panels: each section (About Me, Current Projects, Highlighted Projects)
+   is a full-width panel with a light gray title box across the top. */
+.panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+section.panel + section.panel {
+    margin-top: 32px;
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 56px;
+    padding: 10px 24px;
+    background: var(--header);
+    border-bottom: 1px solid var(--border);
+}
+
+.panel-header h2 {
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-size: 1.2rem;
+}
+
+.panel-body {
+    padding: 24px;
+}
+
+/* About Me: photo + description */
 .intro {
     display: flex;
     gap: 32px;
     align-items: center;
-    padding: 32px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
 }
 
 .photo {
@@ -103,7 +134,12 @@ a {
     .intro {
         flex-direction: column;
         text-align: center;
-        padding: 24px 16px;
+    }
+
+    .panel-header,
+    .panel-body {
+        padding-left: 16px;
+        padding-right: 16px;
     }
 }
 
@@ -137,7 +173,29 @@ a {
 
 .card-body {
     flex: 1;
+    display: flex;
+    flex-direction: column;
     padding: 16px;
+}
+
+/* "View on GitHub": darker blue, pinned to the bottom of the widget. */
+.btn.btn-github {
+    align-self: flex-start;
+    margin-top: auto;
+    background: #1a3fa3;
+}
+
+/* Shown instead of "View on GitHub" when the repo is private. Not clickable. */
+.btn.btn-private {
+    align-self: flex-start;
+    margin-top: auto;
+    background: #d93025;
+    cursor: default;
+    user-select: none;
+}
+
+.btn.btn-github:hover {
+    background: #142f7a;
 }
 
 /* Without an image, keep the title clear of the Edit button. */
@@ -163,21 +221,6 @@ a {
     align-self: flex-start;
 }
 
-.section-heading {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 20px;
-}
-
-.section-heading h2 {
-    border: none;
-    padding: 0;
-    margin: 0;
-}
 
 .logout {
     display: flex;

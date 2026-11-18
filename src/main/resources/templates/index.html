@@ -14,24 +14,26 @@
         <button type="submit" class="btn btn-secondary">Log out</button>
     </form>
 
-    <section class="intro">
-        <img th:if="${!#strings.isEmpty(portfolio.photo)}" class="photo"
-             th:src="@{${portfolio.photo}}" th:alt="${portfolio.name}">
-        <div th:unless="${!#strings.isEmpty(portfolio.photo)}" class="photo placeholder">Photo</div>
-        <div class="intro-text">
-            <h1 th:text="${portfolio.name}">Name</h1>
-            <p th:text="${portfolio.description}">Description</p>
+    <section class="panel">
+        <div class="panel-body intro">
+            <img th:if="${!#strings.isEmpty(portfolio.photo)}" class="photo"
+                 th:src="@{${portfolio.photo}}" th:alt="${portfolio.name}">
+            <div th:unless="${!#strings.isEmpty(portfolio.photo)}" class="photo placeholder">Photo</div>
+            <div class="intro-text">
+                <h1 th:text="${portfolio.name}">Name</h1>
+                <p th:text="${portfolio.description}">Description</p>
+            </div>
+            <a th:if="${loggedIn}" class="btn btn-red" th:href="@{/admin/profile}">Edit</a>
         </div>
-        <a th:if="${loggedIn}" class="btn btn-red" th:href="@{/admin/profile}">Edit</a>
     </section>
 
-    <section th:each="section : ${sections}">
-        <div class="section-heading">
+    <section class="panel" th:each="section : ${sections}">
+        <div class="panel-header">
             <h2 th:text="${section.title}">Projects</h2>
             <a th:if="${loggedIn}" class="btn btn-red"
                th:href="@{/admin/projects/{s}/new(s=${section.slug})}">Add</a>
         </div>
-        <div class="grid">
+        <div class="panel-body grid">
             <th:block th:each="project : ${portfolio.projects(section)}">
                 <div th:replace="~{fragments :: card(${project}, ${section})}"></div>
             </th:block>

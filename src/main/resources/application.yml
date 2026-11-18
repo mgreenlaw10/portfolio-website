@@ -1,15 +1,29 @@
 spring:
   application:
     name: portfolio-website
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+app:
+  # Where edits made on the site are saved: portfolio.json and uploads/.
+  data-dir: data
+
+# Admin login (open it by clicking your photo 3 times within 1 second).
+# The password is stored only as a BCrypt hash, never as plain text.
+admin:
+  username: mgreenlaw10
+  password-hash: '$2a$10$fTxcPKJrh3DoEXXscpMbZeKxmOeoxdK9wu8vHSoS7Ixg1A/tHE2rS'
 
 # ---------------------------------------------------------------------------
-# Page content. Edit anything below, then restart the app to see changes.
-#
-# Images: put files in src/main/resources/static/images/ and reference them
-# as /images/<file>. Leave an image blank ("") to show a placeholder.
+# Starting page content. This is only used the first time the app runs, to
+# create data/portfolio.json. After that, edit the site from the page itself
+# (log in, then use the Edit / Add buttons), or delete data/portfolio.json to
+# start over from what's below.
 # ---------------------------------------------------------------------------
 portfolio:
-  name: Mack Greenlaw
+  name: Mack Greenlaw-Scully
   photo: ""   # e.g. /images/profile.jpg
   description: >-
     I'm a programmer and developer. Replace this text with a short description

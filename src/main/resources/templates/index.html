@@ -5,34 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title th:text="${portfolio.name}">Portfolio</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script th:src="@{/js/photo-login.js}" defer></script>
 </head>
 <body>
 <main>
+
+    <form th:if="${loggedIn}" class="logout" th:action="@{/logout}" method="post">
+        <button type="submit" class="btn btn-secondary">Log out</button>
+    </form>
 
     <section class="intro">
         <img th:if="${!#strings.isEmpty(portfolio.photo)}" class="photo"
              th:src="@{${portfolio.photo}}" th:alt="${portfolio.name}">
         <div th:unless="${!#strings.isEmpty(portfolio.photo)}" class="photo placeholder">Photo</div>
-        <div>
+        <div class="intro-text">
             <h1 th:text="${portfolio.name}">Name</h1>
             <p th:text="${portfolio.description}">Description</p>
         </div>
+        <a th:if="${loggedIn}" class="btn btn-red" th:href="@{/admin/profile}">Edit</a>
     </section>
 
-    <section>
-        <h2>Current Projects</h2>
-        <div class="grid">
-            <th:block th:each="project : ${portfolio.currentProjects}">
-                <div th:replace="~{fragments :: card(${project})}"></div>
-            </th:block>
+    <section th:each="section : ${sections}">
+        <div class="section-heading">
+            <h2 th:text="${section.title}">Projects</h2>
+            <a th:if="${loggedIn}" class="btn btn-red"
+               th:href="@{/admin/projects/{s}/new(s=${section.slug})}">Add</a>
         </div>
-    </section>
-
-    <section>
-        <h2>Highlighted Projects</h2>
         <div class="grid">
-            <th:block th:each="project : ${portfolio.highlightedProjects}">
-                <div th:replace="~{fragments :: card(${project})}"></div>
+            <th:block th:each="project : ${portfolio.projects(section)}">
+                <div th:replace="~{fragments :: card(${project}, ${section})}"></div>
             </th:block>
         </div>
     </section>

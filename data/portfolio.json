@@ -1,0 +1,37 @@
+{
+  "name" : "Mack Greenlaw-Scully",
+  "photo" : "/uploads/b19f6aff-f5fc-4b84-90b2-12293c4fbd88.jpg",
+  "description" : "I am a computer science student at Penn State University. I love to make things, so I made this webpage to highlight some of my favorite things that I've made.",
+  "currentProjects" : [ {
+    "id" : "224e8939-652c-4684-baa8-f2b59570b6f4",
+    "title" : "Cat Game (Godot)",
+    "github" : "",
+    "description" : "A lighthearted video game that I am developing in Godot for my lovely girlfriend as a gift (GitHub private).",
+    "image" : "/uploads/5741f3cf-e536-47e1-87dc-a14456c7953b.png"
+  } ],
+  "highlightedProjects" : [ {
+    "id" : "53dcaa94-8312-4ae8-b83d-bd558073146e",
+    "title" : "Handwritten Digit Classifier (Java)",
+    "github" : "https://github.com/mgreenlaw10/handwritten-digit-classifier",
+    "description" : "A handwritten neural network that can classify the MNIST handwritten digit training set with 96 percent accuracy after 10 training epochs. My implementation of the neural network is inspired by a course I am currently taking on the Mathematics of Deep Learning.",
+    "image" : ""
+  }, {
+    "id" : "059f980d-e295-43db-8e8d-28fc831ec2b3",
+    "title" : "Chess Engine/Bot (C)",
+    "github" : "https://github.com/mgreenlaw10/chess-engine",
+    "description" : "A chess engine/bot written in C by me and my lovely girlfriend. It uses no external libraries except for GUI. We implemented the logic for a fully-functioning chess engine from scratch and a bot that plays at ~1000 chess.com ELO with alpha-beta tree search and a static evaluation function.",
+    "image" : ""
+  }, {
+    "id" : "87090ee5-c73c-448d-9a51-c4297c4de55e",
+    "title" : "Rust Text Editor",
+    "github" : "https://github.com/mgreenlaw10/rust-text-editor",
+    "description" : "A terminal-based text editor written in Rust. Supports creating/editing UTF-8 encoded text files in the terminal (Windows or Linux). Extra features include ctrl+s saving, vertical window scrolling, and a working selection window (as you would expect ctrl+arrow or shift+arrow to function in a text editor).",
+    "image" : ""
+  }, {
+    "id" : "6af2b5e7-4e66-40ef-8174-b8be61c0c0c6",
+    "title" : "2D Game Engine (Java)",
+    "github" : "https://github.com/mgreenlaw10/java-game-engine",
+    "description" : "The first big project I made: a game engine written in Java. Using no external packages, I wrote a tiny 2D RPG game engine with AABB physics, an animation interface, a level editor, and more.",
+    "image" : ""
+  } ]
+}

@@ -77,11 +77,17 @@ a {
     font-size: 0.9rem;
 }
 
-/* Intro: photo + description */
+/* Intro: photo + description, on a panel styled like the project widgets.
+   The panel spans the full content width, so its edges line up with the
+   outer edges of the project grid below. */
 .intro {
     display: flex;
     gap: 32px;
     align-items: center;
+    padding: 32px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
 }
 
 .photo {
@@ -90,12 +96,14 @@ a {
     height: 160px;
     border-radius: 50%;
     object-fit: cover;
+    user-select: none;
 }
 
 @media (max-width: 600px) {
     .intro {
         flex-direction: column;
         text-align: center;
+        padding: 24px 16px;
     }
 }
 
@@ -115,12 +123,158 @@ a {
     overflow: hidden;
 }
 
+/* Images keep their own shape: full width, no cropping. */
 .card-image {
+    display: block;
     width: 100%;
+    height: auto;
+}
+
+/* Grey box shown only on the edit page when there's no image yet. */
+.card-image.placeholder {
     aspect-ratio: 16 / 9;
-    object-fit: cover;
 }
 
 .card-body {
+    flex: 1;
     padding: 16px;
+}
+
+/* Without an image, keep the title clear of the Edit button. */
+.card:has(.card-edit):not(:has(.card-image)) h3 {
+    padding-right: 56px;
+}
+
+.card {
+    position: relative;
+}
+
+.card-edit {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.intro-text {
+    flex: 1;
+}
+
+.intro .btn {
+    align-self: flex-start;
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+}
+
+.section-heading h2 {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.logout {
+    display: flex;
+    justify-content: flex-end;
+    margin: -32px 0 16px;
+}
+
+/* Buttons */
+.btn,
+button {
+    display: inline-block;
+    padding: 8px 14px;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.2;
+    text-decoration: none;
+    color: #fff;
+    background: var(--link);
+    border: 1px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-red {
+    background: #d93025;
+}
+
+.btn-red:hover {
+    background: #b3261e;
+}
+
+.btn-secondary {
+    color: var(--text);
+    background: var(--surface);
+    border-color: var(--border);
+}
+
+/* Login and edit pages */
+main.narrow {
+    max-width: 360px;
+}
+
+main.edit {
+    max-width: 560px;
+}
+
+.subtitle {
+    margin-top: -8px;
+}
+
+.login-form,
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.login-form label,
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.9rem;
+}
+
+.field small {
+    color: var(--muted);
+}
+
+.edit-form .card-image {
+    border-radius: 8px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+}
+
+input,
+textarea {
+    padding: 8px 10px;
+    font: inherit;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+input[type="file"] {
+    padding: 6px;
+}
+
+.error {
+    color: #d93025;
 }

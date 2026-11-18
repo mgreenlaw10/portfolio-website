@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Edit profile</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script th:src="@{/js/image-preview.js}" defer></script>
+</head>
+<body>
+<main class="edit">
+    <h1>Edit profile</h1>
+    <p th:if="${error}" class="error" th:text="${error}">Error</p>
+
+    <form class="edit-form" th:action="@{/admin/profile}" method="post" enctype="multipart/form-data">
+        <div class="field">
+            <span>Photo</span>
+            <img th:if="${!#strings.isEmpty(photo)}" class="photo preview" th:src="@{${photo}}" alt="Current photo">
+            <div th:unless="${!#strings.isEmpty(photo)}" class="photo placeholder preview">Photo</div>
+            <input type="file" name="photo" accept="image/png,image/jpeg,image/gif,image/webp">
+            <small>Leave empty to keep the current photo.</small>
+        </div>
+        <label class="field">Name
+            <input type="text" name="name" th:value="${name}" required>
+        </label>
+        <label class="field">Description
+            <textarea name="description" rows="6" th:text="${description}"></textarea>
+        </label>
+        <div class="form-actions">
+            <button type="submit" class="btn">Publish</button>
+            <a class="btn btn-secondary" th:href="@{/}">Cancel</a>
+        </div>
+    </form>
+</main>
+</body>
+</html>

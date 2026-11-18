@@ -3,10 +3,11 @@
 <body>
 
 <!-- One project widget. Used by both project sections in index.html. -->
-<article th:fragment="card(project)" class="card">
+<article th:fragment="card(project, section)" class="card">
+    <a th:if="${loggedIn}" class="btn btn-red card-edit"
+       th:href="@{/admin/projects/{s}/{id}(s=${section.slug},id=${project.id})}">Edit</a>
     <img th:if="${!#strings.isEmpty(project.image)}" class="card-image"
          th:src="@{${project.image}}" th:alt="${project.title}">
-    <div th:unless="${!#strings.isEmpty(project.image)}" class="card-image placeholder">Image</div>
     <div class="card-body">
         <h3 th:text="${project.title}">Project</h3>
         <p th:text="${project.description}">Description</p>
